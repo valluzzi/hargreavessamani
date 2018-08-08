@@ -22,7 +22,7 @@
 # Created:     03/06/2014
 #-------------------------------------------------------------------------------
 from  gecosistema_core import *
-import datetime
+import math,datetime
 
 def strftime(frmt, text):
     """
