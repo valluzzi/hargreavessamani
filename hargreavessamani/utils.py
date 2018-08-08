@@ -21,7 +21,22 @@
 #
 # Created:     03/06/2014
 #-------------------------------------------------------------------------------
-from datetime import *
+from  gecosistema_core import *
+import datetime
+
+def strftime(frmt, text):
+    """
+    strftime
+    """
+    if not text:
+        return ""
+    elif isinstance(text, (datetime.datetime,datetime.date,) ):
+        return text.strftime(frmt)
+    elif isstring(text):
+        date = datetime.datetime.strptime(text, "%Y-%m-%d")
+        return date.strftime(frmt)
+
+    return ""
 
 def sun_NR(doy,lat):
     """
@@ -70,7 +85,7 @@ def HargreavesSamani( Tmin, Tmax, date, lat=44.0, lam=2.45, kRs=0.16):
     if (Tmax is None or Tmin is None):
         return None
 
-    jul = datetime.strftime("%j",date)
+    jul = strftime("%j",date)
     #lam=2.45 # [MJ/kg]
     #kRs=0.16 #0.16 internal and 0.19 coastal
     julianday=float(jul)
@@ -88,3 +103,5 @@ if __name__=="__main__":
 
     for Tmax, Tmin, date in [(25,36,"2018-08-07"),]:
         print HargreavesSamani( Tmin, Tmax, date )
+
+    print HargreavesSamani(18,33,'2018-08-08',44.0,2.45,0.16);
