@@ -81,25 +81,23 @@ def HargreavesSamani( Tmin, Tmax, date, lat=44.0, lam=2.45, kRs=0.16):
     """
     HargreavesSamani
     """
-    try:
-        if (Tmax is None or Tmin is None):
-            return None
 
-        jul = strftime("%j",date)
-        #lam=2.45 # [MJ/kg]
-        #kRs=0.16 #0.16 internal and 0.19 coastal
-        julianday=float(jul)
-        Ra  = sun_NR(julianday,lat)/1000000
-        Pow = 0.5
-        #ET0 =  0.0135*kRs*(Ra/lam)*numpy.sqrt(Tmax-Tmin)*(Tmed+17.8)
-        #ET0 =  0.0135*kRs*(Ra/lam)*numpy.sqrt(Tmax-Tmin)*((Tmax+Tmin)/2+17.8)
+    if (Tmax is None or Tmin is None or date is None):
+        return None
 
-        #ET0 = 0.0135*kRs*(Ra/lam)*numpy.power((Tmax-Tmin),0.6 )*((Tmax+Tmin)/2+17.8)
-        ET0  = 0.0135*kRs*(Ra/lam)*(abs(Tmax-Tmin)**Pow)*((Tmax+Tmin)/2+17.8)
-        return ET0
-    except Exception as ex:
-        print ex
+    Tmin,Tmax=float(Tmin),float(Tmax)
+    jul = strftime("%j",date)
+    #lam=2.45 # [MJ/kg]
+    #kRs=0.16 #0.16 internal and 0.19 coastal
+    julianday=float(jul)
+    Ra  = sun_NR(julianday,lat)/1000000
+    Pow = 0.5
+    #ET0 =  0.0135*kRs*(Ra/lam)*numpy.sqrt(Tmax-Tmin)*(Tmed+17.8)
+    #ET0 =  0.0135*kRs*(Ra/lam)*numpy.sqrt(Tmax-Tmin)*((Tmax+Tmin)/2+17.8)
 
+    #ET0 = 0.0135*kRs*(Ra/lam)*numpy.power((Tmax-Tmin),0.6 )*((Tmax+Tmin)/2+17.8)
+    ET0  = 0.0135*kRs*(Ra/lam)*(abs(Tmax-Tmin)**Pow)*((Tmax+Tmin)/2+17.8)
+    return ET0
 
 if __name__=="__main__":
 
