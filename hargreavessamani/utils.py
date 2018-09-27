@@ -85,7 +85,6 @@ def HargreavesSamani( Tmin, Tmax, date, lat=44.0, lam=2.45, kRs=0.16):
     if (Tmax is None or Tmin is None or date is None):
         return None
 
-    Tmin,Tmax=float(Tmin),float(Tmax)
     jul = strftime("%j",date)
     #lam=2.45 # [MJ/kg]
     #kRs=0.16 #0.16 internal and 0.19 coastal
